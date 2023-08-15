@@ -1,0 +1,8 @@
+TelaPessoa
+
+PessoaDAO dao = new PessoaDAO();
+ArrayList<Pesso. pessoas = dao.Listar();
+
+for (Pessoa pessoa: pessoas){
+}
+}
