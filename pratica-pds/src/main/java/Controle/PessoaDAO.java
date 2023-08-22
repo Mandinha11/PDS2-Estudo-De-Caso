@@ -17,7 +17,7 @@ public class PessoaDAO {
 
 		ArrayList<Pessoa> pessoas = new ArrayList();
 
-		String query = "SELECT * FROM pessoa";
+		String query = "SELECT * FROM funcionario";
 
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
@@ -33,8 +33,7 @@ public class PessoaDAO {
 
 				pessoas.add(p);
 			}
-			
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -49,7 +48,7 @@ public class PessoaDAO {
 
 		Connection con = c.conectar();
 
-		String query = "INSERT INTO pessoa (id_funcionario, primeiro_nome) VALUES (?, ?)";
+		String query = "INSERT INTO funcionario (id_funcionario, primeiro_nome) VALUES (?, ?)";
 
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
@@ -62,9 +61,55 @@ public class PessoaDAO {
 			c.fecharConexao();
 
 			return true;
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return false;
+	}
+
+	public boolean excluir(Pessoa p) {
+		Conexao c = Conexao.getInstancia();
+		Connection con = c.conectar();
+
+		String query = "DELETE FROM funcionario WHERE id_funcionario = ?;";
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setInt(1, p.getIdFuncionario());
+			ps.executeUpdate();
+			
+			c.fecharConexao();
+			
+			return true;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+
+	public boolean atualizar(Pessoa p) {
+		Conexao c = Conexao.getInstancia();
+		Connection con = c.conectar();
+
+		String query = "UPDATE funcionario SET primeiro_nome = ? WHERE  id_funcionario = ?";
+		
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, p.getPrimeiroNome());
+			ps.setInt(1, p.getIdFuncionario());
+			
+			ps.executeUpdate();
+			
+			c.fecharConexao();
+			
+			return true;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+
 		return false;
 	}
 
