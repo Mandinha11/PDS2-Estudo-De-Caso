@@ -64,6 +64,8 @@ public class PessoaDAO {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			c.fecharConexao();
 		}
 		return false;
 	}
@@ -78,12 +80,13 @@ public class PessoaDAO {
 			ps.setInt(1, p.getIdFuncionario());
 			ps.executeUpdate();
 			
-			c.fecharConexao();
 			
 			return true;
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
+		}finally {
+			c.fecharConexao();
 		}
 
 		return false;
@@ -108,6 +111,8 @@ public class PessoaDAO {
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
+		}finally {
+			c.fecharConexao();
 		}
 
 		return false;
